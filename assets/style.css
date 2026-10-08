@@ -1,0 +1,159 @@
+@define-color accent #73e2ad;
+window { background: #080b0a; color: #f3f7f4; font-family: "Inter", "Ubuntu", "Cantarell", sans-serif; font-size: 13px; }
+.titlebar { background: #080b0a; color: #819087; box-shadow: none; min-height: 26px; }
+.wordmark { font-size: 9px; letter-spacing: 4px; }
+.app-shell { padding: 0 8px; }
+.sidebar { background: #111613; padding: 20px 14px 12px; border-radius: 14px; }
+.brand { font-size: 27px; font-weight: 800; letter-spacing: -1px; }
+.eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #7d9285; margin-top: 12px; margin-bottom: 8px; }
+.accent { color: #8aebba; }
+.main { padding: 22px 26px 16px; background: linear-gradient(170deg, #19261f, #111613 45%); border-radius: 14px; }
+.heading { font-size: 27px; font-weight: 800; letter-spacing: -0.8px; }
+.subtitle { color: #b6c7bd; font-size: 14px; line-height: 1.6; }
+.muted { color: #93a499; font-size: 12px; }
+.tiny { color: #84958b; font-size: 10px; line-height: 1.5; }
+button { background: #242e28; border: none; box-shadow: none; border-radius: 9px; padding: 10px 15px; color: #eef5f0; }
+button:hover { background: #33443a; }
+button:disabled { opacity: 0.42; }
+button:focus-visible { outline: 2px solid @accent; outline-offset: 2px; }
+.nav { background: transparent; color: #9fadA4; padding: 8px 12px; font-size: 13px; min-height: 23px; }
+.nav:hover { background: #212c25; color: white; }
+.nav.selected { background: #253b2e; color: #b2f4cf; }
+.library-shortcut { background: transparent; padding: 9px 8px; }
+.library-shortcut:hover { background: #263229; }
+.library-name { font-size: 12px; }
+.library-icon { color: #9bd5b4; background: #263a2e; padding: 7px 9px; border-radius: 6px; }
+.primary { background: #73e2ad; color: #082718; font-weight: 800; border-radius: 24px; padding: 12px 22px; }
+.primary:hover { background: #97f1c4; }
+.secondary { background: #29382e; color: #dceadf; }
+.link-action { background: transparent; color: #adc7b7; padding: 4px 0; font-size: 12px; }
+.link-action:hover { color: #9af3c5; background: transparent; }
+.hero { padding: 30px; background: linear-gradient(125deg, #294535, #19281f); border-radius: 16px; }
+.library-hero { padding: 20px 26px; background: linear-gradient(110deg, #284e39, #1e3227); border-radius: 14px; }
+.hero-icon { color: #9defc1; font-size: 68px; padding: 0 14px; }
+.hero-title { font-size: 26px; font-weight: 800; letter-spacing: -0.8px; }
+.settings-card { background: #18231c; border: 1px solid #2a3a2f; border-radius: 14px; padding: 24px; }
+.section-title { font-size: 19px; font-weight: 750; color: #edf8f0; }
+.notice { background: #233a2d; color: #c3e5cf; padding: 10px 14px; border-radius: 8px; font-size: 12px; }
+entry { background: #232c26; border: 1px solid #34453a; border-radius: 24px; padding: 11px 16px; color: #eef6f0; }
+entry:focus { border-color: #73e2ad; }
+.account { border: 1px solid #3b5143; border-radius: 24px; background: #18231c; }
+.profile-name { font-size: 12px; color: #bce8cb; }
+.chip { border-radius: 20px; font-size: 12px; background: #2a362e; padding: 8px 16px; }
+.chip.selected { background: #e8f3eb; color: #14271b; }
+.tile-button { padding: 0; background: #1a241d; border-radius: 11px; }
+.tile-button:hover { background: #2a3c30; }
+.tile { padding: 12px; }
+.tile-art { min-height: 128px; border-radius: 8px; font-size: 58px; }
+.artwork { border-radius: 8px; background: #293b30; }
+.art-0 { background: linear-gradient(140deg, #395d71, #243643); color: #b8dfe3; }
+.art-1 { background: linear-gradient(140deg, #775c34, #302824); color: #efcd95; }
+.art-2 { background: linear-gradient(140deg, #32635a, #20332f); color: #a3e4ba; }
+.art-3 { background: linear-gradient(140deg, #6e4559, #302432); color: #edafca; }
+.tile-name { font-size: 14px; font-weight: 750; }
+flowboxchild { padding: 0; }
+.track-row { padding: 10px 12px; border-radius: 8px; }
+.track-row:hover { background: #26372d; }
+.track-index { color: #7e9788; font-size: 12px; min-width: 26px; }
+.song { font-size: 13px; font-weight: 700; }
+.device { background: #202e25; padding: 20px; border-radius: 13px; }
+.device-icon { font-size: 34px; color: #89e6b2; }
+.player { padding: 14px 16px 10px; background: #080b0a; }
+.cover { min-width: 54px; min-height: 54px; border-radius: 7px; background: #274434; color: #9de2ba; font-size: 28px; }
+.transport { background: transparent; padding: 9px; min-width: 16px; }
+.transport.active { color: #84e9b4; background: #243f30; }
+.play { border-radius: 50%; background: #ecf8ef; color: #0b2718; min-width: 22px; min-height: 22px; padding: 9px; }
+.play:hover { background: #a1f1c5; }
+scale trough { background: #3a473f; min-height: 3px; border-radius: 4px; }
+scale highlight { background: #8beabb; min-height: 3px; border-radius: 4px; }
+scale slider { background: #ddf8e6; min-width: 9px; min-height: 9px; margin: 0; padding: 0; border: none; box-shadow: none; }
+.lyrics { font-size: 28px; font-weight: 700; color: #b3f0cc; line-height: 1.7; padding: 30px 8px; }
+checkbutton { padding: 8px 0; }
+.welcome { padding: 22px 34px; background: radial-gradient(ellipse at 70% 30%, #1d3c2b, #0c1410 65%, #090d0b); }
+.login-card { padding: 20px 30px; }
+.login-title { font-size: 44px; font-weight: 850; letter-spacing: -1.7px; line-height: 1.1; }
+.login-button { margin-top: 8px; padding: 16px 30px; font-size: 15px; }
+
+.library-hero { padding: 14px 22px; }
+.library-hero .eyebrow { margin: 0; }
+.library-hero .hero-icon { font-size: 48px; }
+.library-hero .hero-title { font-size: 24px; }
+
+.login-title-busy { font-size: 30px; letter-spacing: -0.8px; }
+
+/* Spotify-like desktop layout: neutral panels, global header, dense library. */
+@define-color accent #1ed760;
+window, .titlebar, .player { background: #000; color: #fff; }
+.titlebar { min-height: 20px; }
+.topbar { padding: 8px 14px 14px; }
+.brand { font-size: 24px; }
+.home-button { background: #1f1f1f; border-radius: 50%; padding: 14px; }
+.sidebar { background: #121212; padding: 20px 12px 12px; border-radius: 8px; }
+.sidebar .section-title { font-size: 16px; }
+.main { background: linear-gradient(180deg, #252525, #121212 38%); border-radius: 8px; padding: 20px 22px 12px; }
+.heading { font-size: 26px; color: white; }
+.section-title { font-size: 23px; color: white; }
+.subtitle, .muted { color: #b3b3b3; }
+.tiny { color: #8b8b8b; }
+button { background: #282828; color: white; }
+button:hover { background: #383838; }
+.global-search { background: #1f1f1f; border: 1px solid #333; border-radius: 28px; padding: 13px 20px; }
+.global-search:focus { border-color: white; }
+.account { background: #242424; border: none; border-radius: 24px; }
+.profile-name { color: white; }
+.chip { background: #303030; color: white; padding: 8px 14px; border-radius: 20px; }
+.chip.selected { background: white; color: #121212; }
+.nav { background: transparent; color: #b3b3b3; }
+.nav:hover { background: #282828; color: white; }
+.library-shortcut { background: transparent; padding: 8px; border-radius: 5px; }
+.library-shortcut:hover { background: #242424; }
+.library-name { font-size: 14px; }
+.artwork, .art-placeholder { background: #282828; border-radius: 5px; }
+.art-placeholder { color: #aaa; font-size: 26px; }
+.liked-cover { min-width: 44px; min-height: 44px; background: linear-gradient(135deg, #450af5, #b1d9bc); color: white; border-radius: 5px; font-size: 23px; }
+.quick-tile { background: #ffffff15; padding: 0 12px 0 0; border-radius: 5px; }
+.quick-tile:hover { background: #ffffff28; }
+.quick-play { color: #1ed760; margin-right: 8px; }
+.tile-button { background: transparent; border-radius: 6px; }
+.tile-button:hover { background: #282828; }
+.tile { padding: 10px; }
+.tile-name { font-size: 15px; color: white; }
+.primary { background: #1ed760; color: #000; border-radius: 28px; }
+.primary:hover { background: #3be477; }
+.secondary { background: #292929; color: white; }
+.link-action { color: #b3b3b3; }
+.link-action:hover { color: white; }
+.notice { background: #292929; color: #ddd; font-size: 11px; padding: 8px 12px; }
+.player { padding: 14px 18px; }
+.play { background: white; color: black; }
+.play:hover { background: #eee; }
+.transport { background: transparent; color: #b3b3b3; }
+.transport:hover { color: white; background: #222; }
+.transport.active { color: #1ed760; background: transparent; }
+.cover { background: #242424; color: #aaa; }
+scale trough { background: #4d4d4d; }
+scale highlight { background: #fff; }
+scale:hover highlight { background: #1ed760; }
+scale slider { background: white; }
+.playlist-header { padding: 20px 0; }
+.playlist-title { font-size: 42px; font-weight: 850; letter-spacing: -1.5px; }
+.liked-hero { min-width: 156px; min-height: 156px; background: linear-gradient(135deg, #450af5, #b1d9bc); font-size: 65px; color: white; border-radius: 5px; }
+.track-columns { border-bottom: 1px solid #ffffff25; padding: 8px 12px; }
+.track-row:hover { background: #ffffff14; }
+.track-index { color: #999; }
+.device, .settings-card { background: #202020; border-color: #333; }
+.device-icon { color: #1ed760; }
+.hero { background: #202020; }
+.hero-icon { color: #1ed760; }
+.lyrics { color: #fff; }
+.welcome { background: linear-gradient(180deg, #242424, #000 55%); }
+.login-card { background: #121212; padding: 30px 44px; border-radius: 10px; }
+.accent { color: #1ed760; }
+
+.topbar { padding: 6px 14px 10px; }
+.home-button { padding: 11px; }
+.global-search { padding: 10px 20px; }
+
+.playlist-header { padding: 12px 0; }
+entry:focus-within { outline: 2px solid white; outline-offset: -2px; box-shadow: none; }
+scale:focus-within slider { outline-color: white; }

@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.runtime/
+dist/
+build/
+vendor/spotifyd
+vendor/spotify_player
+vendor/*.exe
+verification/

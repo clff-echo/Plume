@@ -1,0 +1,98 @@
+name: Build release
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ubuntu:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install runtime and test dependencies
+        run: sudo apt-get update && sudo apt-get install -y python3-gi python3-gi-cairo gir1.2-gtk-4.0 gir1.2-secret-1 xvfb libasound2t64 libdbus-1-3 libpulse0
+      - name: Test core and platform adapters
+        run: python3 -m unittest discover -s tests -v
+      - name: Fetch verified audio components
+        run: python3 scripts/fetch-engine.py
+      - name: Verify GTK screens
+        run: xvfb-run -a dbus-run-session -- python3 scripts/smoke-ui.py
+      - name: Build Ubuntu and source downloads
+        run: |
+          python3 scripts/build-deb.py
+          python3 scripts/source-zip.py
+          bash scripts/third-party-sources.sh
+          dpkg-deb --info dist/*.deb
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu-and-source
+          path: dist/*
+          if-no-files-found: error
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Windows audio engine
+        shell: pwsh
+        run: |
+          cargo install --git https://github.com/librespot-org/librespot --tag v0.8.0 --locked --root build/librespot librespot
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Copy-Item build/librespot/bin/librespot.exe vendor/librespot.exe
+          Invoke-WebRequest https://raw.githubusercontent.com/librespot-org/librespot/v0.8.0/LICENSE -OutFile vendor/LIBRESPOT-LICENSE
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-python
+            mingw-w64-ucrt-x86_64-python-gobject
+            mingw-w64-ucrt-x86_64-gtk4
+            mingw-w64-ucrt-x86_64-python-psutil
+            mingw-w64-ucrt-x86_64-pyinstaller
+            mingw-w64-ucrt-x86_64-adwaita-icon-theme
+      - name: Package native Windows application
+        shell: msys2 {0}
+        run: |
+          python -m unittest discover -s tests -p test_portable.py -v
+          python scripts/fetch-windows-helper.py
+          python -m PyInstaller --noconfirm packaging/plume.spec
+          cp -r /ucrt64/share/licenses dist/Plume/third-party-licenses
+          python scripts/check-windows.py
+      - name: Create Windows installer
+        shell: pwsh
+        run: |
+          & "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" packaging/windows.iss
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: dist/Plume-*-windows-x64.exe
+          if-no-files-found: error
+  release:
+    needs: [ubuntu, windows]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+      - name: Prepare checksums and draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cd release-assets
+          sha256sum *.deb *.exe *.zip *.tar.gz > SHA256SUMS.txt
+          cd ..
+          version=$(python3 -c 'from plume import __version__; print(__version__)')
+          if ! gh release view "v$version" >/dev/null 2>&1; then
+            gh release create "v$version" --target "$GITHUB_SHA" --draft --prerelease --title "Plume $version — Windows et Ubuntu" --notes-file RELEASE_NOTES.md
+          fi
+          gh release upload "v$version" release-assets/* --clobber

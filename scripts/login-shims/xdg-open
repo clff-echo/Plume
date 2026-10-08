@@ -1,0 +1,3 @@
+#!/bin/sh
+# The parent reads the helper's printed URL and opens it outside the capped group.
+exit 0
